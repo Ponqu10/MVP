@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Design Studio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header>
+        <h1>Transform Your Room with AI-Powered Interior Design</h1>
+        <p>Upload a photo of your room, choose your style, and get a personalized design concept.</p>
+        <form data-netlify="true" name="design-request" method="POST">
+            <input type="hidden" name="form-name" value="design-request" />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="style">Preferred Style:</label>
+            <select id="style" name="style" required>
+                <option value="">Select a style</option>
+                <option value="modern">Modern</option>
+                <option value="rustic">Rustic</option>
+                <option value="scandinavian">Scandinavian</option>
+                <option value="contemporary">Contemporary</option>
+                <option value="traditional">Traditional</option>
+                <option value="industrial">Industrial</option>
+                <option value="bohemian">Bohemian</option>
+                <option value="minimalist">Minimalist</option>
+            </select>
+            <label for="photo">Upload Photo:</label>
+            <button type="button" id="upload-widget">Upload Photo</button>
+            <input type="hidden" id="photo-url" name="photo-url">
+            <button type="submit">Get Your Design</button>
+        </form>
+        <p><small>Our team will process your request and email you a custom design concept within 48 hours. We’re building an AI-powered version to automate this soon!</small></p>
+    </header>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <img src="upload-icon.png" alt="Upload">
+                <p>Upload a photo of your room</p>
+            </div>
+            <div class="step">
+                <img src="style-icon.png" alt="Choose Style">
+                <p>Choose your preferred style</p>
+            </div>
+            <div class="step">
+                <img src="design-icon.png" alt="Receive Design">
+                <p>Receive your custom design concept</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Designs Section -->
+    <section id="samples">
+        <h2>Sample Designs</h2>
+        <div class="gallery">
+            <img src="sample1.jpg" alt="Modern Living Room">
+            <img src="sample2.jpg" alt="Rustic Bedroom">
+            <img src="sample3.jpg" alt="Scandinavian Kitchen">
+        </div>
+        <p>Sample Designs (Actual results may vary)</p>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section id="cta">
+        <h2>Ready to Redesign Your Room?</h2>
+        <button onclick="window.scrollTo(0, 0);">Start Now</button>
+        <p>It’s quick, easy, and obligation-free!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 AI Design Studio</p>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+    </footer>
+
+    <!-- Cloudinary Upload Script -->
+    <script>
+        var uploadWidget = cloudinary.createUploadWidget({
+            cloudName: 'your-cloud-name',
+            uploadPreset: 'your-upload-preset'
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                document.getElementById('photo-url').value = result.info.secure_url;
+            }
+        });
+        document.getElementById('upload-widget').addEventListener('click', function(){
+            uploadWidget.open();
+        }, false);
+    </script>
+</body>
+</html>
